@@ -1,7 +1,8 @@
 const NUMBER_REGEX = "\\d+\\.?\\d*";
 const OPERATOR_REGEX = "[+\\-*\\/%]";
+const PUNCTUATION_REGEX = "[();]";
 
-const REGEX = `(${NUMBER_REGEX})|(${OPERATOR_REGEX})`;
+const REGEX = `(${NUMBER_REGEX})|(${OPERATOR_REGEX})|(${PUNCTUATION_REGEX})`;
 
 const lex = input => {
   let tokens = [];
@@ -19,6 +20,11 @@ const lex = input => {
         type: 'operator',
         value: matched[2],
       });
+    } else if (matched[3]) {
+      tokens.push({
+        type: 'punctuation',
+        value: matched[3],
+      });
     } else {
       throw new Error('invalid token!' + matched[0]);
     }
@@ -27,6 +33,10 @@ const lex = input => {
     matched = input.slice(start).match(REGEX);
   }
 
+  tokens.push({
+    type: 'punctuation',
+    value: 'EOL',
+  });
   return tokens;
 };
 
