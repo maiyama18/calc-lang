@@ -1,5 +1,5 @@
 const RBP = {
-  '-': 5,
+  '-': 3,
 };
 const LBP = {
   '+': 1,
@@ -13,8 +13,8 @@ const parse = tokens => {
   const parseTree = [];
   let position = 0;
 
-  const advance = () => position++;
-  const getToken = () => tokens[position];
+  const consume = () => tokens[position++];
+  const peek = () => tokens[position];
 
   const nudFunc = token => node => {
     switch (token.type) {
@@ -39,6 +39,7 @@ const parse = tokens => {
       left: node,
       right: expression(RBP[op] || LBP[op])
     });
+
     switch (token.type) {
       case 'operator':
         switch (token.value) {
@@ -53,29 +54,24 @@ const parse = tokens => {
         }
     }
     return null;
-  }
+  };
 
   const expression = rbp => {
     let left;
-    let token = getToken();
+    let token = consume();
 
-    advance();
     left = nudFunc(token)(token);
-    while (rbp < LBP[getToken().value]) {
-      const nextToken = getToken();
+    while (rbp < LBP[peek().value]) {
+      token = consume();
 
-      advance();
-      left = ledFunc(nextToken)(left);
+      left = ledFunc(token)(left);
     }
 
     return left;
   };
 
-  while (getToken().value !== 'EOL') {
-    parseTree.push(expression(0));
-  }
-
-  return parseTree;
+  if (peek().type !== 'end') return expression(0);
+  else return {};
 };
 
 module.exports = {
