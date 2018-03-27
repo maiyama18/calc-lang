@@ -10,7 +10,6 @@ const LBP = {
 };
 
 const parse = tokens => {
-  const parseTree = [];
   let position = 0;
 
   const consume = () => tokens[position++];
