@@ -37,7 +37,7 @@ const parse = tokens => {
       type: 'operator',
       value: op,
       left: node,
-      right: expression(RBP[op])
+      right: expression(RBP[op] || LBP[op])
     });
     switch (token.type) {
       case 'operator':
@@ -47,7 +47,6 @@ const parse = tokens => {
           case '-':
             return operatorNode('-');
           case '*':
-            console.log('!!!!!!!!!!!!!!!');
             return operatorNode('*');
           case '/':
             return operatorNode('/');
