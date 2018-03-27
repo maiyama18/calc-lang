@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { lex } = require('../src/lexer');
+const { lex } = require('../lexer');
 
 describe('lex', () => {
   it('should lex empty input', () => {

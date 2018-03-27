@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { parse } = require('../src/parser');
+const { parse } = require('../parser');
 
 describe('parse', () => {
   it('should parse empty input', () => {
