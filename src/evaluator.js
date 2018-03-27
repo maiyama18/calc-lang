@@ -6,21 +6,18 @@ const operate = {
   '%': (a, b) => a % b,
 };
 
-const parseNode = node => {
+const evaluate = node => {
   switch (node.type) {
     case 'number':
       return node.value;
     case 'operator':
-      const { left, right, value } = node
-      if (left) return operate[value](parseNode(left), parseNode(right));
-      else return operate[value](parseNode(right));
+      const { left, right, value } = node;
+
+      if (left) return operate[value](evaluate(left), evaluate(right));
+      else return operate[value](evaluate(right));
   }
 };
 
-const eval= parseTree => {
-  return parseNode(parseTree[0]);
-};
-
 module.exports = {
-  eval,
+  evaluate,
 }
