@@ -1,5 +1,5 @@
 const NUMBER_REGEX = "\\d+\\.?\\d*";
-const OPERATOR_REGEX = "[+\\-*\\/%]";
+const OPERATOR_REGEX = "[+\\-*\\/]";
 
 const REGEX = `(${NUMBER_REGEX})|(${OPERATOR_REGEX})`;
 
