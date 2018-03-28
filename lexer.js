@@ -35,4 +35,4 @@ const lex = input => {
 
 module.exports = {
   lex,
-}
+};

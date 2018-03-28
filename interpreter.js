@@ -8,4 +8,4 @@ const interpret = input => {
 
 module.exports = {
   interpret,
-}
+};

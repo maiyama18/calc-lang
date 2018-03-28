@@ -20,4 +20,4 @@ const evaluate = node => {
 
 module.exports = {
   evaluate,
-}
+};
